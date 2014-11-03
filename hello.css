@@ -50,11 +50,17 @@ h1.content-title{
     margin-bottom:20px;
     font-family: 'Open Sans', sans-serif!important;
 }
-/*Compose*/
-.btn-send{
-    text-align:center;
-    margin-top:20px;
+
+#salespeople-select {
+    display: block;
+    padding:20px;
 }
+
+svg {
+    /*display: inline;*/
+    float: left;
+}
+
 /*mail list*/
 
 ul.mail-list{
