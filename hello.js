@@ -1,9 +1,9 @@
+Sales = new Meteor.Collection('sales');
 
 // Routes
 Router.route('/', function () {
-  this.render('home');
+  this.render('layout');
 });
-
 
 
 if (Meteor.isClient) {
