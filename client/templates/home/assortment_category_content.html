@@ -1,0 +1,11 @@
+<template name="AssortmentCategoryContent">
+    <div class="ui {{tag}} tab segment" data-tab="{{title}}">
+        <div class="ui horizontal divider">{{title}}</div>
+        {{#each assortment}}
+            <!-- \{{../button_color}} gets color from outside the assortment array  -->
+            <div class="massive ui inverted {{../button_color}} button">
+                {{title}}
+            </div>
+        {{/each}}
+    </div>
+</template>

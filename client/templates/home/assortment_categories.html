@@ -1,0 +1,19 @@
+<template name="AssortmentCategories">
+    <div class="ui horizontal divider">SORTIMENT</div>
+    <div class="ui grid">
+        <div class="column center aligned">
+
+            <!-- The tab bar menu elements ("Øl", "Vin", etc.) -->
+            <div class="ui secondary menu">
+                {{#each categories}}
+                    {{> AssortmentCategory}}
+                {{/each}}
+            </div>
+
+            <!-- The tab bar content (Select "Øl" => show "Øl" assortment in this content holder -->
+            {{#each categories}}
+                {{> AssortmentCategoryContent}}
+            {{/each}}
+        </div>
+    </div>
+</template>

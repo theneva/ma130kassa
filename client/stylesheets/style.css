@@ -1,0 +1,29 @@
+#layout-wrapper {
+    margin-top: 1%;
+}
+
+.highlight {
+    background-color: black;
+}
+
+.ui.secondary.menu>.item, .ui.secondary.menu>.menu>.item {
+    box-shadow: none;
+    /*min-width: 150px;*/
+    border: none;
+    height: 80px !important;
+    background: #ddd;
+    margin: 0 .25em;
+    padding: .5em 1em;
+    border-radius: .2857rem;
+    text-align: center;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+.ui.inverted.button {
+    box-shadow: 0 0 0 2px #fff inset!important;
+    background: 0 0;
+    color: #fff;
+    text-shadow: none!important;
+    margin-top: 10px;
+}
