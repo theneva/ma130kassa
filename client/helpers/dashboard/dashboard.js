@@ -20,26 +20,29 @@ Template.Dashboard.rendered = function () {
         var from = $fromField.val();
         var to = $toField.val();
 
+        if (previousFrom === from && previousTo === to) {
+            return;
+        }
+
         // check if the specified date is in the future
         if (new Date(to) > new Date()) {
             console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
             $toField.val(previousTo);
             return;
         }
+        console.log(moment(previousTo).diff(moment(previousFrom), 'days'));
 
-        if (previousFrom === from && previousTo === to) {
+        if (to < from) {
+            console.warn('Invalid period: ' + from + ' - ' + to + '.');
+
+            $fromField.val(previousFrom);
+            $toField.val(previousTo);
+
             return;
         }
 
         previousFrom = from;
         previousTo = to;
-
-        console.log(moment(previousTo).diff(moment(previousFrom), 'days'));
-
-        if (to < from) {
-            console.warn('Invalid period: ' + from + ' - ' + to + '.');
-            return;
-        }
 
         var salesInPeriod = Sales.find({date: {$gte: from, $lte: to}}).fetch();
 
@@ -154,12 +157,12 @@ var getGraphReadyArray = function (salesData, from, to) {
         graphReadySales.push(sale);
     }
 
-    var lastSale = graphReadySales[new Date(to)];
-    if (!lastSale || lastSale.y === 0) {
-        graphReadySales.push(
-            {x: new Date(to), y: 0}
-        );
-    }
+    //var lastSale = graphReadySales[new Date(to)];
+    //if (!lastSale || lastSale.y === 0) {
+    //    graphReadySales.push(
+    //        {x: new Date(to), y: 0}
+    //    );
+    //}
 
     return graphReadySales;
 };
