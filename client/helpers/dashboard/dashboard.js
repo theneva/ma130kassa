@@ -20,6 +20,13 @@ Template.Dashboard.rendered = function () {
         var from = $fromField.val();
         var to = $toField.val();
 
+        // check if the specified date is in the future
+        if (new Date(to) > new Date()) {
+            console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
+            $toField.val(previousTo);
+            return;
+        }
+
         if (previousFrom === from && previousTo === to) {
             return;
         }
@@ -38,7 +45,7 @@ Template.Dashboard.rendered = function () {
 
         d3.select('#chart svg').datum([{
             key: 'Current period',
-            values: getGraphReadyArray(salesInPeriod)
+            values: getGraphReadyArray(salesInPeriod, from, to)
         }]).call(chart);
         chart.update();
 
@@ -47,14 +54,14 @@ Template.Dashboard.rendered = function () {
     });
 
     chart = nv.models.lineChart()
-            .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-            .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-            .transitionDuration(350)  //how fast do you want the lines to transition?
-            .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-            .showYAxis(true)        //Show the y-axis
-            .showXAxis(true)        //Show the x-axis
-            .forceY([0])
-        ;
+        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+        .transitionDuration(350)  //how fast do you want the lines to transition?
+        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+        .showYAxis(true)        //Show the y-axis
+        .showXAxis(true)        //Show the x-axis
+        .forceY([0])
+    ;
 
     nv.addGraph(function () {
         nv.utils.windowResize(function () {
@@ -77,7 +84,6 @@ Template.Dashboard.rendered = function () {
                 {
                     key: 'Previous period',
                     values: [
-
                         {x: '2014-11-15', y: 0},
                         {x: '2014-11-16', y: 0},
                         {x: '2014-11-17', y: 2},
@@ -87,6 +93,9 @@ Template.Dashboard.rendered = function () {
                 }
             ]
         ).call(chart);
+
+        console.log('from: ' + $('#line-chart-from-date').val() + ", to: " + $('#line-chart-to-date').val());
+
         return chart;
     });
 
@@ -122,7 +131,7 @@ Template.Dashboard.rendered = function () {
 
 };
 
-var getGraphReadyArray = function (salesData) {
+var getGraphReadyArray = function (salesData, from, to) {
     // MapReduce idea from http://www.boxuk.com/blog/unboxing-map-reduce-and-underscore-js/
     var salesCountByDate = _(salesData)
         .chain()
@@ -143,6 +152,13 @@ var getGraphReadyArray = function (salesData) {
             y: salesCountByDate[date]
         };
         graphReadySales.push(sale);
+    }
+
+    var lastSale = graphReadySales[new Date(to)];
+    if (!lastSale || lastSale.y === 0) {
+        graphReadySales.push(
+            {x: new Date(to), y: 0}
+        );
     }
 
     return graphReadySales;
