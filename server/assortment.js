@@ -1,6 +1,4 @@
 if (Assortment.find().count() === 0) {
-    console.log(Assortment.find().count());
-
     Assortment.insert(
         {
             'title': 'Øl (tapp)',
@@ -9,35 +7,75 @@ if (Assortment.find().count() === 0) {
             'assortment': [
                 {
                     'title': 'Pilsner fat 0,5l',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 37
                 },
                 {
                     'title': 'Pilsner fat 0,5l medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 29
                 },
                 {
                     'title': 'Bayer FAT',
-                    'image': 'Bayer FAT Medlem'
+                    'image': '',
+                    'in_stock': 15,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 42
+                },
+                {
+                    'title': 'Bayer FAT Medlem',
+                    'image': '',
+                    'in_stock': 15,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 32
                 },
                 {
                     'title': 'Classic',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 19,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 39
                 },
                 {
                     'title': 'Classic Medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 19,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 29
                 },
                 {
                     'title': 'Mugge PILSNER',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 6,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 99
                 },
                 {
                     'title': 'Mugge BAYER',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 5,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 109
                 },
                 {
                     'title': 'Mugge CLASSIC',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 6,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 109
                 }
             ]
         });
@@ -50,73 +88,140 @@ if (Assortment.find().count() === 0) {
             'assortment': [
                 {
                     'title': 'Kirin Ichiban',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 31,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 39
                 },
                 {
                     'title': 'Stella Artios',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 30,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 39
                 },
                 {
                     'title': 'Erdinger',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 39
                 },
                 {
                     'title': 'Newcastle',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 39
                 },
                 {
                     'title': 'White Dog',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 39
                 },
                 {
                     'title': 'O\'Mission (Glutenfri)',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 39
                 },
                 {
                     'title': 'MÅNEDENS: Halling',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 39
                 },
                 {
                     'title': 'Aas Pale Ale',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 35
                 },
                 {
                     'title': 'Aas Pale Ale Medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 25
                 },
                 {
                     'title': 'Aas Weizen',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 35
                 },
                 {
                     'title': 'Aas Weizen Medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 25
                 },
                 {
                     'title': 'Aas Bayer Flaske',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 35
                 },
                 {
                     'title': 'Aas Bayer Flaske Medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 25
+                },
+                {
+                    'title': 'Aas Bock',
+                    'image': '',
+                    'in_stock': 32,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 35
                 },
                 {
                     'title': 'Aas Bock Medlem',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 32,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 32
                 },
                 {
                     'title': 'Aas Stout',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 20,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 35
                 },
                 {
                     'title': 'Aas Stout Medlem',
-                    'image': ''
-                },
-                {
-                    'title': 'Aas UTEN',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 20,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 25
                 }
-
             ]
         });
 
@@ -128,59 +233,115 @@ if (Assortment.find().count() === 0) {
             'assortment': [
                 {
                     'title': 'Coca-Cola',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 5,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Cola Zero',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 17
                 },
                 {
                     'title': 'Popcorn',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 15
                 },
                 {
                     'title': 'Solo',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Aass UTEN',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 1,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Chilinøtter',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 20,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 25
                 },
                 {
                     'title': 'Potetgull SALT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 13
                 },
                 {
                     'title': 'Potetgull PAPRIKA',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 13
                 },
                 {
                     'title': 'Potetgull Salt og Pepper',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 13
                 },
                 {
                     'title': 'Glitre TYTTEBÆR',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 4,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Glitre NATURELL',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 6,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Ubuntu Cola',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 17
                 },
                 {
                     'title': 'Sprite',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 3,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 },
                 {
                     'title': 'Bayer UTEN',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 17
                 }
             ]
         });
@@ -188,44 +349,80 @@ if (Assortment.find().count() === 0) {
     Assortment.insert(
         {
             'title': 'Vin, Cider, Crabbies',
-            'button_color': 'green',
+            'button_color': 'pink',
             'tag': '',
             'assortment': [
                 {
                     'title': 'Liefmans Fruitesse',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 0,
+                    'total_sales': 0,
+                    'in_assortment': false,
+                    'price': 37
                 },
                 {
                     'title': 'Crabbies',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 21,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 37
                 },
                 {
                     'title': 'Hvitvin',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 14,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 37
                 },
                 {
                     'title': 'Hvitvin MEDLEM',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 14,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 27
                 },
                 {
                     'title': 'Rødvin',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 37
                 },
                 {
                     'title': 'Rødvin MEDLEM',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 27
                 },
                 {
                     'title': 'Rødvin Halvflaske',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 5,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 95
                 },
                 {
                     'title': 'Cava Flaske',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 140
                 },
                 {
                     'title': 'Hooch',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 7,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 37
                 }
             ]
         });
@@ -238,43 +435,83 @@ if (Assortment.find().count() === 0) {
             'assortment': [
                 {
                     'title': 'Fiskefjes SHOT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 4,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 20
                 },
                 {
-                    'title': 'Fiskefjes 4 for 100',
-                    'image': ''
+                    'title': 'Fiskefjes 4 for 60',
+                    'image': '',
+                    'in_stock': 1,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 60
                 },
                 {
                     'title': 'Små Grønne SHOT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 8,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 20
                 },
                 {
-                    'title': 'Små Grønne 4 for 100',
-                    'image': ''
+                    'title': 'Små Grønne 4 for 60',
+                    'image': '',
+                    'in_stock': 2,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 60
                 },
                 {
                     'title': 'Små Grå SHOT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 20
                 },
                 {
-                    'title': 'Små Grå 4 for 100',
-                    'image': ''
+                    'title': 'Små Grå 4 for 60',
+                    'image': '',
+                    'in_stock': 2,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 60
                 },
                 {
                     'title': 'Små Kolde SHOT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 12,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 20
                 },
                 {
-                    'title': 'Små Kolde 4 for 100',
-                    'image': ''
+                    'title': 'Små Kolde 4 for 60',
+                    'image': '',
+                    'in_stock': 3,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 60
                 },
                 {
                     'title': 'Små Blå SHOT',
-                    'image': ''
+                    'image': '',
+                    'in_stock': 10,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 20
                 },
                 {
-                    'title': 'Små Blå 4 for 100',
-                    'image': ''
+                    'title': 'Små Blå 4 for 60',
+                    'image': '',
+                    'in_stock': 2,
+                    'total_sales': 0,
+                    'in_assortment': true,
+                    'price': 60
                 }
             ]
         });

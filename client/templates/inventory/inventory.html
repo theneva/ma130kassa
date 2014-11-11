@@ -1,0 +1,41 @@
+<template name="Inventory">
+    <div class="ui horizontal divider">Inventarkontroll</div>
+    <table class="ui compact celled definition sortable table">
+        <thead class="full-width">
+        <tr>
+            <th>I sortiment</th>
+            <th class="sorted ascending">Produktnavn</th>
+            <th class="sorted ascending">Produktkategori</th>
+            <th class="sorted ascending">Antall til salgs</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each products}}
+            {{#each assortment}}
+                <tr>
+                    <td class="collapsing">
+                        <div class="ui form">
+                            <div class="inline field">
+                                <div class="ui toggle checkbox">
+                                    <input id="{{title}}" {{isInAssortment in_assortment}} type="checkbox">
+                                    <label for="{{title}}"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{title}}</td>
+                    <td>{{../title}}</td>
+                    <td>
+                        {{#if repurchaseItem in_stock in_assortment}}
+                            {{in_stock}} (bestill mer!)
+                        {{else}}
+                            <div class="stock-count">{{in_stock}}</div>
+                        {{/if}}
+                    </td>
+                </tr>
+            {{/each}}
+        {{/each}}
+        </tbody>
+
+    </table>
+</template>

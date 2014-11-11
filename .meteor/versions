@@ -18,6 +18,7 @@ ejson@1.0.4
 fastclick@1.0.1
 follower-livedata@1.0.2
 geojson-utils@1.0.1
+gildaspk:moment-datepicker@0.0.1
 html-tools@1.0.2
 htmljs@1.0.2
 http@1.0.8
@@ -45,8 +46,10 @@ minimongo@1.0.5
 mizzao:bootstrap-3@3.3.0
 mobile-status-bar@1.0.1
 mongo@1.0.8
+mrt:moment@2.8.1
 observe-sequence@1.0.3
 ordered-dict@1.0.1
+pfafman:nvd3@0.1.0
 random@1.0.1
 reactive-dict@1.0.4
 reactive-var@1.0.3
