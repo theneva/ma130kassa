@@ -48,13 +48,13 @@ Template.Dashboard.rendered = function () {
             previousFrom = from;
             previousTo = to;
 
-            var salesInPeriod = Sales.find({date: {$gt: from, $lte: to}}).fetch();
+            var salesInPeriod = Sales.find({date: {$gt: from, $lte: to}}, {sort: {date: 1}}).fetch();
             var salesInPreviousPeriod = Sales.find({
                 date: {
                     $gt: moment(from).subtract(diff, 'days').format('YYYY-MM-DD'),
                     $lte: moment(to).subtract(diff, 'days').format('YYYY-MM-DD')
                 }
-            }).fetch();
+            }, {sort: {date: 1}}).fetch();
 
             for (var i = 0; i < salesInPreviousPeriod.length; i++) {
                 salesInPreviousPeriod[i].date = moment(salesInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
@@ -89,7 +89,7 @@ Template.Dashboard.rendered = function () {
 function meteorTrackerAutorun() {
     Tracker.autorun(function () {
 
-        var salesData = Sales.find().fetch();
+        var salesData = Sales.find({}, {sort: {date: 1}}).fetch();
 
 
         // Line Chart stuff
@@ -182,7 +182,7 @@ function createLineChart() {
                 $gte: moment(today).subtract(diff * 2, 'days').format('YYYY-MM-DD'),
                 $lte: moment(today).subtract(diff, 'days').format('YYYY-MM-DD')
             }
-        }).fetch();
+        }).sort({date: 1}).fetch();
 
         for (var i = 0; i < salesDataInPreviousPeriod.length; i++) {
             salesDataInPreviousPeriod[i].date = moment(salesDataInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
@@ -192,7 +192,7 @@ function createLineChart() {
             .datum([
                 {
                     // Get the data between today and seven days ago
-                    values: getLineChartReadyArray(Sales.find({date: {$gte: firstDayInPeriod, $lte: today}}).fetch()),
+                    values: getLineChartReadyArray(Sales.find({date: {$gte: firstDayInPeriod, $lte: today}}, {sort: {date: 1}}).fetch()),
                     key: 'Sales selected period'
                 },
                 {
@@ -228,7 +228,7 @@ function updateGraphWhenNewSale() {
     highestSingleDaySaleCount = 0;
     sales = {};
 
-    var data = Sales.find().fetch();
+    var data = Sales.find({}, {sort: {date: 1}}).fetch();
 
     data.forEach(function (sale) {
         addSale(sale);
