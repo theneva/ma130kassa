@@ -1,7 +1,7 @@
 var lineChart;
 
-Template.Dashboard.rendered = function () {
 
+Template.Dashboard.rendered = function () {
 
     var $fromField = $("#line-chart-from-date");
     var $toField = $("#line-chart-to-date");
@@ -116,9 +116,16 @@ var getLineChartReadyArray = function (salesData, from, to) {
 
 function createLineChart() {
 
+    var $fromField = $("#line-chart-from-date");
+    var $toField = $("#line-chart-to-date");
+
+    var diff = moment($toField.val()).diff(moment($fromField.val()), 'days');
+
+    console.log('diff: ' + diff);
+
     var now = moment();
 
-    var daySevenDaysAgo = moment().subtract(7, 'days').format('YYYY-MM-DD');
+    var firstDayInPeriod = moment().subtract(diff, 'days').format('YYYY-MM-DD');
     var today = now.format('YYYY-MM-DD');
 
     lineChart = nv.models.lineChart()
@@ -153,20 +160,20 @@ function createLineChart() {
 
         var salesData = Sales.find({
             date: {
-                $gte: moment(today).subtract(14, 'days').format('YYYY-MM-DD'),
-                $lte: moment(today).subtract(7, 'days').format('YYYY-MM-DD')
+                $gte: moment(today).subtract(diff * 2, 'days').format('YYYY-MM-DD'),
+                $lte: moment(today).subtract(diff, 'days').format('YYYY-MM-DD')
             }
         }).fetch();
 
         for (var i = 0; i < salesData.length; i++) {
-            salesData[i].date = moment(salesData[i].date).add(7, 'days').format('YYYY-MM-DD');
+            salesData[i].date = moment(salesData[i].date).add(diff, 'days').format('YYYY-MM-DD');
         }
 
         d3.select('#lineChart svg')
             .datum([
                 {
                     // Get the data between today and seven days ago
-                    values: getLineChartReadyArray(Sales.find({date: {$gte: daySevenDaysAgo, $lte: today}}).fetch()),
+                    values: getLineChartReadyArray(Sales.find({date: {$gte: firstDayInPeriod, $lte: today}}).fetch()),
                     key: 'Sales selected period'
                 },
                 {
