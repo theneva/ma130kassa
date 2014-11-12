@@ -1,24 +1,49 @@
 <template name="Dashboard">
     <div class="ui horizontal divider">Dashboard</div>
 
-    <div>
-        <div style="margin-left: 60px;">
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="column">
+                <div class="ui segment">
+                    <div id="bullet-chart">
+                        <svg></svg>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui segment">
+                    Tablet
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui segment">
+                    <div>
+                        <div id="stackedAreaGraph">
+                            <svg style="width:100%; min-height: 400px;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui segment">
+                    <div>
+                        <!--<div style="margin-left: 60px;">-->
 
-            <div class="ui form">
-                <div class="inline field">
-                    <label>Time period:</label>
-                    <input type="text" id="line-chart-from-date" class="datepicker" data-datepicker-format="YYYY-MM-DD"/> -
-                    <input type="text" id="line-chart-to-date" class="datepicker"  data-datepicker-format="YYYY-MM-DD"/>
+                            <div class="ui form">
+                                <div class="inline field">
+                                    <label>Time period:</label>
+                                    <input type="text" style="width: auto;" id="line-chart-from-date" class="datepicker" data-datepicker-format="YYYY-MM-DD"/> -
+                                    <input type="text" id="line-chart-to-date" class="datepicker"  data-datepicker-format="YYYY-MM-DD"/>
+                                </div>
+                            </div>
+                        <!--</div>-->
+
+                        <div id="lineChart">
+                            <svg style="width:100%; min-height: 400px;"></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <div id="chart">
-            <svg style="width:49%; min-height: 400px;"></svg>
-        </div>
-    </div>
-
-    <div id="chart2">
-        <svg style="height:400px;width:700px"></svg>
     </div>
 </template>

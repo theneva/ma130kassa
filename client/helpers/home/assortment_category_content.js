@@ -1,14 +1,20 @@
 Template.AssortmentCategoryContent.events({
    'click .button': function (e, t) {
-       console.log(this);
-       if (this.in_stock > 0) {
-           toastr.success('En <b>' + this.title + '</b> er bestilt!');
+       var $targetElement = $(e.target).attr('class');
 
-           //Assortment.update({title: this.title}, {$inc: {"$.assortment.$.total_sales": 1}});
-           Sales.insert({product_name: this.title, date: new Date()})
+       var isInfoButton = $targetElement.indexOf("information") > -1;
 
-       } else {
-           toastr.error('Tomt for <b>' + this.title + '</b>!');
+       // "information" is a class for the info labels, like "ikke-medlem" and "medlem"
+       if (!isInfoButton) {
+           if (this.in_stock > 0) {
+               toastr.success('En <b>' + this.title + '</b> er bestilt!');
+
+               //Assortment.update({title: this.title}, {$inc: {"$.assortment.$.total_sales": 1}});
+               Sales.insert({product_name: this.title, date: new Date()})
+
+           } else {
+               toastr.error('Tomt for <b>' + this.title + '</b>!');
+           }
        }
    }
 });

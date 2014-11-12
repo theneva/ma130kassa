@@ -1,11 +1,13 @@
 <template name="AssortmentCategoryContent">
     <div class="ui {{tag}} tab segment" data-tab="{{title}}">
-        <a class="ui green label">Stk. på lager</a>
-        <a class="ui red label">Utsolgt</a>
-        <a class="mini ui inverted blue button">Ikke-medlem</a>
-        <a class="mini ui inverted purple button">Medlem</a>
+
+        <!-- Displaying the information labels -->
+        <a class="ui green label information">Stk. på lager</a>
+        <a class="ui red label information">Utsolgt</a>
+        <a class="mini ui inverted blue button information">Ikke-medlem</a>
+        <a class="mini ui inverted purple button information">Medlem</a>
         <div class="ui horizontal divider">{{title}}</div>
-        <!-- \{{../button_color}} gets color from outside the assortment array  -->
+
 
         {{#each assortment}}
             {{#if isMedlem title}}
