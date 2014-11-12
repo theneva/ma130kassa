@@ -3,66 +3,87 @@ var lineChart;
 
 Template.Dashboard.rendered = function () {
 
-    var $fromField = $("#line-chart-from-date");
-    var $toField = $("#line-chart-to-date");
+    if (!this.rendered) {
+        var $fromField = $("#line-chart-from-date");
+        var $toField = $("#line-chart-to-date");
 
-    var now = moment();
+        var now = moment();
 
-    // default to current week.
-    var previousFrom = moment().subtract(7, 'day').format('YYYY-MM-DD');
-    var previousTo = now.format('YYYY-MM-DD');
-    $fromField.val(previousFrom);
-    $toField.val(previousTo);
+        // default to current week.
+        var previousFrom = moment().subtract(7, 'day').format('YYYY-MM-DD');
+        var previousTo = now.format('YYYY-MM-DD');
+        $fromField.val(previousFrom);
+        $toField.val(previousTo);
 
-    var $datepickers = $('.datepicker');
-    $datepickers.datepicker();
-    $datepickers.change(function (e) {
+        var $datepickers = $('.datepicker');
+        $datepickers.datepicker();
+        $datepickers.change(function (e) {
 
-        var from = $fromField.val();
-        var to = $toField.val();
+            var from = $fromField.val();
+            var to = $toField.val();
 
-        if (previousFrom === from && previousTo === to) {
-            return;
-        }
+            if (previousFrom === from && previousTo === to) {
+                return;
+            }
 
-        // check if the specified date is in the future
-        if (new Date(to) > new Date()) {
-            console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
-            toastr.error('You cannot see into the future, dude!');
-            $toField.val(previousTo);
-            return;
-        }
-        console.log(moment(previousTo).diff(moment(previousFrom), 'days'));
+            // check if the specified date is in the future
+            if (new Date(to) > new Date()) {
+                console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
+                toastr.error('You cannot see into the future, dude!');
+                $toField.val(previousTo);
+                return;
+            }
 
-        if (to < from) {
-            console.warn('Invalid period: ' + from + ' - ' + to + '.');
+            if (to < from) {
+                console.warn('Invalid period: ' + from + ' - ' + to + '.');
 
-            $fromField.val(previousFrom);
-            $toField.val(previousTo);
+                $fromField.val(previousFrom);
+                $toField.val(previousTo);
 
-            return;
-        }
+                return;
+            }
 
-        previousFrom = from;
-        previousTo = to;
+            var diff = moment($toField.val()).diff(moment($fromField.val()), 'days');
 
-        var salesInPeriod = Sales.find({date: {$gte: from, $lte: to}}).fetch();
+            previousFrom = from;
+            previousTo = to;
 
-        d3.select('#lineChart svg').datum([{
-            key: 'Sales selected period',
-            values: getLineChartReadyArray(salesInPeriod, from, to)
-        }]).call(lineChart);
-        lineChart.update();
+            var salesInPeriod = Sales.find({date: {$gt: from, $lte: to}}).fetch();
+            var salesInPreviousPeriod = Sales.find({
+                date: {
+                    $gt: moment(from).subtract(diff, 'days').format('YYYY-MM-DD'),
+                    $lte: moment(to).subtract(diff, 'days').format('YYYY-MM-DD')
+                }
+            }).fetch();
 
-        //console.log(salesInPeriod);
+            for (var i = 0; i < salesInPreviousPeriod.length; i++) {
+                salesInPreviousPeriod[i].date = moment(salesInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
+            }
 
-    });
+            console.log(salesInPreviousPeriod);
 
-    createLineChart();
-    createBulletChartSales();
-    meteorTrackerAutorun();
+            d3.select('#lineChart svg').datum([
+                {
+                    key: 'Sales selected period',
+                    values: getLineChartReadyArray(salesInPeriod)
+                },
+                {
+                    key: 'Sales previous period',
+                    values: getLineChartReadyArray(salesInPreviousPeriod)
+                }
+            ]).call(lineChart);
+            lineChart.update();
 
+            //console.log(salesInPeriod);
 
+        });
+
+        createLineChart();
+        createBulletChartSales();
+        meteorTrackerAutorun();
+
+        this.rendered = true;
+    }
 };
 
 function meteorTrackerAutorun() {
@@ -88,7 +109,7 @@ function meteorTrackerAutorun() {
     });
 }
 
-var getLineChartReadyArray = function (salesData, from, to) {
+var getLineChartReadyArray = function (salesData) {
     // MapReduce idea from http://www.boxuk.com/blog/unboxing-map-reduce-and-underscore-js/
     var salesCountByDate = _(salesData)
         .chain()
@@ -120,8 +141,6 @@ function createLineChart() {
     var $toField = $("#line-chart-to-date");
 
     var diff = moment($toField.val()).diff(moment($fromField.val()), 'days');
-
-    console.log('diff: ' + diff);
 
     var now = moment();
 
@@ -158,15 +177,15 @@ function createLineChart() {
             .tickFormat(d3.format('d'))
         ;
 
-        var salesData = Sales.find({
+        var salesDataInPreviousPeriod = Sales.find({
             date: {
                 $gte: moment(today).subtract(diff * 2, 'days').format('YYYY-MM-DD'),
                 $lte: moment(today).subtract(diff, 'days').format('YYYY-MM-DD')
             }
         }).fetch();
 
-        for (var i = 0; i < salesData.length; i++) {
-            salesData[i].date = moment(salesData[i].date).add(diff, 'days').format('YYYY-MM-DD');
+        for (var i = 0; i < salesDataInPreviousPeriod.length; i++) {
+            salesDataInPreviousPeriod[i].date = moment(salesDataInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
         }
 
         d3.select('#lineChart svg')
@@ -178,7 +197,7 @@ function createLineChart() {
                 },
                 {
                     // Get the data between today and seven days ago
-                    values: getLineChartReadyArray(salesData),
+                    values: getLineChartReadyArray(salesDataInPreviousPeriod),
                     key: 'Sales previous period'
                 }
             ]
