@@ -10,7 +10,7 @@ Template.AssortmentCategoryContent.events({
                toastr.success('En <b>' + this.title + '</b> er bestilt!');
 
                //Assortment.update({title: this.title}, {$inc: {"$.assortment.$.total_sales": 1}});
-               Sales.insert({product_name: this.title, date: new Date()})
+               Sales.insert({product_name: this.title, date: moment().format('YYYY-MM-DD').substring(0, 10)})
 
            } else {
                toastr.error('Tomt for <b>' + this.title + '</b>!');
