@@ -17,5 +17,12 @@ Template.AssortmentCategories.helpers({
 
 
 Template.AssortmentCategories.rendered = function () {
-    $('.menu .item').tab();
+    if (!this.rendered){
+        $('.menu .item').tab();
+
+        this.rendered = true;
+    }
+
+
+    //console.log('AssortmentCategories.rendered');
 };
