@@ -1,14 +1,24 @@
 <template name="Dashboard">
-    <h1>Dashboard</h1>
-    <input type="text" id="line-chart-from-date" class="datepicker" data-datepicker-format="YYYY-MM-DD"/> -
-    <input type="text" id="line-chart-to-date" class="datepicker"  data-datepicker-format="YYYY-MM-DD"/>
-    <div id="chart">
-        <svg style="height:400px;width:700px"></svg>
+    <div class="ui horizontal divider">Dashboard</div>
+
+    <div>
+        <div style="margin-left: 60px;">
+
+            <div class="ui form">
+                <div class="inline field">
+                    <label>Time period:</label>
+                    <input type="text" id="line-chart-from-date" class="datepicker" data-datepicker-format="YYYY-MM-DD"/> -
+                    <input type="text" id="line-chart-to-date" class="datepicker"  data-datepicker-format="YYYY-MM-DD"/>
+                </div>
+            </div>
+        </div>
+
+        <div id="chart">
+            <svg style="width:49%; min-height: 400px;"></svg>
+        </div>
     </div>
 
     <div id="chart2">
         <svg style="height:400px;width:700px"></svg>
     </div>
-
-    <button id="addDataButton">Add</button>
 </template>

@@ -1,5 +1,3 @@
-$(document).ready(function() {
-    Template.AssortmentCategories.rendered = function () {
-        $('.menu .item').tab();
-    };
-});
+Template.AssortmentCategories.rendered = function () {
+    $('.menu .item').tab();
+};

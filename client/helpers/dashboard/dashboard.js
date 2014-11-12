@@ -27,6 +27,7 @@ Template.Dashboard.rendered = function () {
         // check if the specified date is in the future
         if (new Date(to) > new Date()) {
             console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
+            toastr.error('You cannot see into the future, dude!');
             $toField.val(previousTo);
             return;
         }
@@ -57,12 +58,12 @@ Template.Dashboard.rendered = function () {
     });
 
     chart = nv.models.lineChart()
-        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
-        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
-        .transitionDuration(350)  //how fast do you want the lines to transition?
-        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
-        .showYAxis(true)        //Show the y-axis
-        .showXAxis(true)        //Show the x-axis
+        .margin({left: 70})
+        .useInteractiveGuideline(true)
+        .transitionDuration(350)
+        .showLegend(true)
+        .showYAxis(true)
+        .showXAxis(true)
         .forceY([0])
     ;
 
@@ -70,56 +71,36 @@ Template.Dashboard.rendered = function () {
         nv.utils.windowResize(function () {
             chart.update()
         });
-        chart.xAxis.axisLabel('Date').tickFormat(function (d) {
-            var date = new Date(d);
-            return d3.time.format('%Y-%m-%d')(date);
-        });
 
-        chart.yAxis.axisLabel('Sales').tickFormat(d3.format('d'));
+        chart.xAxis
+            .axisLabel('Date')
+            .tickFormat(function (d) {
+                var date = new Date(d);
+                return d3.time.format('%Y-%m-%d')(date);
+            })
+        ;
+
+        chart.yAxis
+            .axisLabel('Sales')
+            .tickFormat(d3.format('d'))
+        ;
+
         d3.select('#chart svg')
             .datum([
-                // 0
                 {
-                    values: getGraphReadyArray(Sales.find().fetch()),
+                    values: getGraphReadyArray(Sales.find({date: {$gte: $fromField.val(), $lte: $toField.val()}}).fetch()),
                     key: 'Current period'
-                },
-                // 1
-                {
-                    key: 'Previous period',
-                    values: [
-                        {x: '2014-11-15', y: 0},
-                        {x: '2014-11-16', y: 0},
-                        {x: '2014-11-17', y: 2},
-                        {x: '2014-11-18', y: 5},
-                        {x: '2014-11-19', y: 7}
-                    ]
                 }
             ]
         ).call(chart);
 
-        console.log('from: ' + $('#line-chart-from-date').val() + ", to: " + $('#line-chart-to-date').val());
+        //console.log('from: ' + $('#line-chart-from-date').val() + ", to: " + $('#line-chart-to-date').val());
 
         return chart;
     });
 
     Tracker.autorun(function () {
-        console.log("HEI");
-
         var data = [];
-
-        /*        2014-10-12
-
-         2014-10-16
-
-         for (each date between last sale and this sale) {
-         data.push({
-         values: {
-         x: theDate (Y),
-         y: 0
-         }
-         });
-         }*/
-
         data.push({
             values: getGraphReadyArray(Sales.find().fetch()),
             key: 'Sales'
@@ -129,7 +110,6 @@ Template.Dashboard.rendered = function () {
             data
         ).call(chart);
         chart.update();
-        //d3.selectAll('circle').attr('r', 10).attr('fill-opacity', 1);
     });
 
 };
@@ -157,25 +137,5 @@ var getGraphReadyArray = function (salesData, from, to) {
         graphReadySales.push(sale);
     }
 
-    //var lastSale = graphReadySales[new Date(to)];
-    //if (!lastSale || lastSale.y === 0) {
-    //    graphReadySales.push(
-    //        {x: new Date(to), y: 0}
-    //    );
-    //}
-
     return graphReadySales;
 };
-
-Template.Dashboard.events({
-    'click #addDataButton': function () {
-        //var age = getRandomInt(13, 89);
-        //var lastPerson = People.findOne({}, {fields:{x:1},sort:{x:-1},limit:1,reactive:false});
-        //if (lastPerson) {
-        //    People.insert({x:(lastPerson.x + 1), y:age});
-        //} else {
-        //    People.insert({x:1, y:age});
-        //}
-    }
-});
-
