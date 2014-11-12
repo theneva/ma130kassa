@@ -3,6 +3,85 @@ var lineChart;
 
 Template.Dashboard.rendered = function () {
 
+    /*function myData() {
+        var series1 = [];
+        var dates = [];
+        var now = moment();
+        for(var i =1; i < 100; i ++) {
+            now.subtract(1, 'day');
+
+            series1.push({
+                x: i, y: 100 / i
+            });
+        }
+
+        return [
+            {
+                key: "Series #1",
+                values: series1,
+                color: "#0000ff"
+            }
+        ];
+    }
+
+    nv.addGraph(function() {
+        var chart2 = nv.models.lineChart();
+
+        var ticks = [];
+
+        ticks.push('2014-11-01');
+        for (var i = 1; i < 25; i++) {
+            ticks.push('');
+        }
+        ticks.push('2014-11-02');
+        for (var i = 26; i < 50; i++) {
+            ticks.push('');
+        }
+
+        ticks.push('2014-11-03');
+        for (var i = 51; i < 75; i++) {
+            ticks.push('');
+        }
+
+        ticks.push('2014-11-04');
+
+        for (var i = 76; i < 99; i++) {
+            ticks.push('');
+        }
+
+        ticks.push('2014-11-05');
+
+        console.log(ticks);
+
+        chart2.xAxis
+            .axisLabel("X-axis Label")
+            //.tickFormat(function (d) {
+            //    var date = new Date(d);
+            //    console.log(date);
+            //    return d3.time.format('%Y-%m-%d')(date);
+            //});
+            .tickValues(ticks);
+
+        chart2.yAxis
+            .axisLabel("Y-axis Label")
+            .tickFormat(d3.format("d"))
+        ;
+
+        d3.select("svg")
+            .datum(myData())
+            .transition().duration(500).call(chart2);
+
+        nv.utils.windowResize(
+            function() {
+                chart2.update();
+            }
+        );
+
+        return chart2;
+    });*/
+
+
+
     var $fromField = $("#line-chart-from-date");
     var $toField = $("#line-chart-to-date");
 
@@ -96,6 +175,8 @@ var getLineChartReadyArray = function (salesData, from, to) {
 
 function meteorTrackerAutorun() {
     Tracker.autorun(function () {
+
+        // Line Chart stuff
         var data = [];
         data.push({
             values: getLineChartReadyArray(Sales.find().fetch()),
@@ -107,8 +188,8 @@ function meteorTrackerAutorun() {
         ).call(lineChart);
         lineChart.update();
 
+        // Bullet Chart stuff
 
-        updateGraphWhenNewSale();
     });
 }
 
@@ -116,11 +197,8 @@ function meteorTrackerAutorun() {
 
 
 
-
-
-
 // BULLET CHARTS:::::::
-function updateGraphWhenNewSale() {
+/*function updateGraphWhenNewSale() {
     totalItems = 0;
     dateCount = 0;
     highestSingleDaySaleCount = 0;
@@ -147,10 +225,10 @@ function updateGraphWhenNewSale() {
 
     console.log('total items: ' + totalItems);
     console.log('date count: ' + dateCount);
-    if (dateCount == 0) {
+    if (dateCount === 0) {
         mean = 0;
     } else {
-
+        mean = totalItems / dateCount;
     }
 
     updateGraph();
@@ -204,7 +282,7 @@ function getGraphData() {
         measures: [saleCountToday],
         markers: [saleCountYesterday]
     }
-}
+}*/
 
 function createLineChart() {
 
@@ -234,8 +312,6 @@ function createLineChart() {
             lineChart.update()
         });
 
-        console.log("HEI");
-
         lineChart.xAxis
             .axisLabel('Date')
             .tickFormat(function (d) {
@@ -244,14 +320,11 @@ function createLineChart() {
                 return d3.time.format('%Y-%m-%d')(date);
             })
         ;
-        console.log("YO");
 
         lineChart.yAxis
             .axisLabel('Sales')
             .tickFormat(d3.format('d'))
         ;
-
-        console.log("OH LOL");
 
         d3.select('#lineChart svg')
             .datum([
@@ -263,8 +336,11 @@ function createLineChart() {
             ]
         ).call(lineChart);
 
-        console.log("NOE");
-
         return lineChart;
     });
+}
+
+function createBulletChartSales() {
+
+
 }

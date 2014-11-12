@@ -516,3 +516,21 @@ if (Assortment.find().count() === 0) {
             ]
         });
 }
+
+if (Sales.find().count() === 0) {
+
+    var days = 100;
+    for (var i = 0; i < days; i++) {
+
+        var now = moment();
+        now.subtract(days - 1 - i, 'days');
+
+        // each day
+        for (var j = 0; j < Math.floor((Math.random() * 15) + 10); j++) {
+            Sales.insert({
+                product_name: ['Pilsner', 'Kirin', 'White Dog', 'Den siste'][Math.floor((Math.random() * 4))],
+                date: now.format('YYYY-MM-DD').substring(0, 10)
+            });
+        }
+    }
+}
