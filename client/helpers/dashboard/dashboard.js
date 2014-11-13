@@ -39,6 +39,13 @@ Template.Dashboard.rendered = function () {
                 return;
             }
 
+            if (new Date(from) > new Date()) {
+                console.warn('Invalid period (to date in future): ' + from + ' - ' + to + '.');
+                toastr.error('You cannot see into the future, dude!');
+                $fromField.val(previousFrom);
+                return;
+            }
+
             if (to < from) {
                 console.warn('Invalid period: ' + from + ' - ' + to + '.');
 
