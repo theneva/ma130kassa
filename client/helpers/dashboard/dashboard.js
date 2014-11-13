@@ -78,7 +78,17 @@ Template.Dashboard.rendered = function () {
 
         createLineChart();
         createBulletChartSales();
-        createStackedChart();
+
+
+        $('#stackedAreaGraph').append('<div id="stackedLoader" class="ui active inverted dimmer"> <div class="ui text loader">Loading</div> </div> <p></p>');
+
+        setTimeout(function () {
+            console.log("KALT");
+            $('#stackedLoader').remove();
+
+            createStackedChart();
+        }, 5000);
+
         meteorTrackerAutorun();
 
         this.rendered = true;
@@ -397,6 +407,8 @@ function getStackedChartReadyArray(salesData) {
 
         sale.values.sort();
     }
+
+    console.log(result);
 
 
     return result;
