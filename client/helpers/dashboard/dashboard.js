@@ -266,21 +266,30 @@ function generateBulletCharts(data) {
         return profits;
     });
 
-    createBulletChart(data, 'Bottles of beer today', '# flaskeøl', '#bullet-chart-bottlebeer svg', function(sales) {
+    createBulletChart(data, 'Beer bottles', '(today) # bottles', '#bullet-chart-bottlebeer svg', function(sales) {
         var bottles = 0;
 
         for (var saleIndex in sales) {
             var sale = sales[saleIndex];
-            console.log(sale.category);
 
             if (sale.category === "Øl (flaske)") {
                 bottles++;
             }
-
-            //profits += sale.price - sale.wholesale_price;
         }
 
         return bottles;
+    });
+
+    createBulletChart(data, 'Total income', '(today) NOK', '#bullet-chart-totalincome svg', function(sales) {
+        var income = 0;
+
+        for (var saleIndex in sales) {
+            var sale = sales[saleIndex];
+
+            income += sale.price;
+        }
+
+        return income;
     });
 }
 
