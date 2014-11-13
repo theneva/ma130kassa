@@ -80,14 +80,7 @@ Template.Dashboard.rendered = function () {
         createBulletChartSales();
 
 
-        $('#stackedAreaGraph').append('<div id="stackedLoader" class="ui active inverted dimmer"> <div class="ui text loader">Loading</div> </div> <p></p>');
-
-        setTimeout(function () {
-            console.log("KALT");
-            $('#stackedLoader').remove();
-
-            createStackedChart();
-        }, 5000);
+        createStackedChart();
 
         meteorTrackerAutorun();
 
@@ -296,6 +289,7 @@ function getGraphData() {
 
     var saleCountToday = sales[todayString] ? sales[todayString].length : 0;
     var saleCountYesterday = sales[yesterdayString] ? sales[yesterdayString].length : 0;
+    console.log(saleCountYesterday);
 
     return {
         title: "Sales today",
