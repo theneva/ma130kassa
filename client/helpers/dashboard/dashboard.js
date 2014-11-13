@@ -1,4 +1,5 @@
 var lineChart;
+var stackedAreaGraph;
 
 
 Template.Dashboard.rendered = function () {
@@ -78,8 +79,6 @@ Template.Dashboard.rendered = function () {
 
         createLineChart();
         createBulletChartSales();
-
-
         createStackedChart();
 
         meteorTrackerAutorun();
@@ -88,11 +87,18 @@ Template.Dashboard.rendered = function () {
     }
 };
 
+var isFirstRun = true;
+
 function meteorTrackerAutorun() {
+
     Tracker.autorun(function () {
+        /*        console.log(isFirstRun);
+         if (isFirstRun) {
+         isFirstRun = false;
+         return;
+         }*/
 
         var salesData = Sales.find({}, {sort: {date: 1}}).fetch();
-
 
         // Line Chart stuff
         var lineData = [];
@@ -106,10 +112,28 @@ function meteorTrackerAutorun() {
         ).call(lineChart);
         lineChart.update();
 
+
+        if (stackedAreaGraph) {
+            // Stacked
+            d3.select('#stackedAreaGraph svg').datum(getStackedChartReadyArray(salesData))
+                .call(stackedAreaGraph);
+            stackedAreaGraph.update();
+        } else {
+            setTimeout(function () {
+                // Stacked
+                d3.select('#stackedAreaGraph svg').datum(getStackedChartReadyArray(salesData))
+                    .call(stackedAreaGraph);
+                stackedAreaGraph.update();
+            }, 3000);
+        }
+
+
         // Bullet Chart stuff
         updateGraphWhenNewSale();
+
     });
 }
+
 
 var getLineChartReadyArray = function (salesData) {
     // MapReduce idea from http://www.boxuk.com/blog/unboxing-map-reduce-and-underscore-js/
@@ -194,7 +218,12 @@ function createLineChart() {
             .datum([
                 {
                     // Get the data between today and seven days ago
-                    values: getLineChartReadyArray(Sales.find({date: {$gte: firstDayInPeriod, $lte: today}}, {sort: {date: 1}}).fetch()),
+                    values: getLineChartReadyArray(Sales.find({
+                        date: {
+                            $gte: firstDayInPeriod,
+                            $lte: today
+                        }
+                    }, {sort: {date: 1}}).fetch()),
                     key: 'Sales selected period'
                 },
                 {
@@ -289,7 +318,6 @@ function getGraphData() {
 
     var saleCountToday = sales[todayString] ? sales[todayString].length : 0;
     var saleCountYesterday = sales[yesterdayString] ? sales[yesterdayString].length : 0;
-    console.log(saleCountYesterday);
 
     return {
         title: "Sales today",
@@ -301,14 +329,13 @@ function getGraphData() {
 }
 
 
-
 // ----- STACKED
 function createStackedChart() {
 
-    var asd = Sales.find({}, {sort: {date: 1}}).fetch();
+    var sales = Sales.find({}, {sort: {date: 1}}).fetch();
 
     nv.addGraph(function () {
-        var stackedAreaGraph = nv.models.stackedAreaChart()
+        stackedAreaGraph = nv.models.stackedAreaChart()
             .margin({right: 100})
             .x(function (d) {
                 return new Date(d[0])
@@ -335,7 +362,7 @@ function createStackedChart() {
             .tickFormat(d3.format(',.2f'));
 
         d3.select('#stackedAreaGraph svg')
-            .datum(getStackedChartReadyArray(asd))
+            .datum(getStackedChartReadyArray(sales))
             .call(stackedAreaGraph);
 
         nv.utils.windowResize(stackedAreaGraph.update);
@@ -346,22 +373,6 @@ function createStackedChart() {
 }
 
 function getStackedChartReadyArray(salesData) {
-/*    var tmp = {};
-
-    salesData.forEach(function(item) {
-        var obj = tmp[item.product_name] || (tmp[item.product_name] = {});
-
-        obj[item.date] = (obj[item.date] || 0) + 1;
-    });
-
-    return Object.keys(tmp).map(function(key) {
-        return {
-            key: key,
-            values: Object.keys(tmp[key]).map(function(date) {
-                return [date, tmp[key][date]];
-            })
-        };
-    });*/
 
     var result = _.chain(salesData).groupBy('product_name').map(function (el, key) {
         return {
@@ -373,23 +384,23 @@ function getStackedChartReadyArray(salesData) {
     }).value();
 
     var drinks = [];
-    result.forEach(function(d) {
-        d.values.forEach(function(e) {
-            if(drinks.indexOf(e[0]) == -1) {
+    result.forEach(function (d) {
+        d.values.forEach(function (e) {
+            if (drinks.indexOf(e[0]) == -1) {
                 drinks.push(e[0]);
             }
         });
     });
 
-    result.forEach(function(d) {
-        drinks.forEach(function(drink) {
+    result.forEach(function (d) {
+        drinks.forEach(function (drink) {
             var have = false;
-            d.values.forEach(function(e) {
-                if(e[0] == drink) {
+            d.values.forEach(function (e) {
+                if (e[0] == drink) {
                     have = true;
                 }
             });
-            if(!have) {
+            if (!have) {
                 d.values.push([drink, 0]);
             }
         });
@@ -402,29 +413,6 @@ function getStackedChartReadyArray(salesData) {
         sale.values.sort();
     }
 
-    console.log(result);
-
-
     return result;
-
-/*    var counts = salesData.reduce(function(memo, visit) {
-        if (!memo[visit.product_name]) { memo[visit.product_name] = {}; }
-        memo[visit.product_name][visit.date] |= 0;
-        memo[visit.product_name][visit.date] += 1;
-        return memo;
-    }, {});
-    // Transform the count structure using "map".
-    var objects = Object.keys(counts).map(function(city_name) {
-        return {
-            key: city_name,
-            values: Object.keys(counts[city_name]).map(function(date) {
-                return [date, counts[city_name][date]];
-            })
-        };
-    });
-
-    console.log(objects);
-
-    return objects;*/
 
 }
