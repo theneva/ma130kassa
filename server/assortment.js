@@ -580,30 +580,31 @@ if (Sales.find().count() === 0) {
 
     var days = 100;
     var categories = Assortment.find().fetch();
-    console.log(categories);
+
     for (var i = 0; i < days; i++) {
 
         var now = moment();
         now.subtract(days - 1 - i, 'days');
 
-        // each day
-        for (var j = 0; j < Math.floor((Math.random() * 15) + 10); j++) {
+        var minSales = 25;
+        var maxSales = 50;
 
-            var selectedCategory = categories[Math.floor(Math.random(categories.length()))];
+        var actualSales = Math.floor(Math.random() * (maxSales - minSales)) + minSales;
 
-            for (var k in categories) {
-                var selectedItem = selectedCategory.assortment[k];
+        for (var saleIndex = 0; saleIndex < actualSales; saleIndex++) {
+            var selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            //console.log('\tselected category: ' + selectedCategory.title);
 
+            var selectedItem = selectedCategory.assortment[Math.floor(Math.random() * selectedCategory.assortment.length)];
 
-                Sales.insert({
-                    product_name: selectedItem.title,
-                    wholesale_price: selectedItem.wholesale_price,
-                    price: selectedItem.price,
-                    date: now.format('YYYY-MM-DD').substring(0, 10)
-                });
+            var objectToInsert = {
+                product_name: selectedCategory.title,
+                price: selectedItem.price,
+                wholesale_price: selectedItem.wholesale_price,
+                date: now.format('YYYY-MM-DD')
+            };
 
-            }
-
+            Sales.insert(objectToInsert);
         }
     }
 }
