@@ -336,7 +336,7 @@ function createStackedChart() {
 
     nv.addGraph(function () {
         stackedAreaGraph = nv.models.stackedAreaChart()
-            .margin({right: 100})
+            .margin({right: 100, bottom: 100, left: 100, top: 100})
             .x(function (d) {
                 return new Date(d[0])
 
@@ -353,6 +353,7 @@ function createStackedChart() {
 
         //Format x-axis labels with custom function.
         stackedAreaGraph.xAxis
+            .rotateLabels(-45)
             .tickFormat(function (d) {
                 var date = new Date(d);
                 return d3.time.format('%Y-%m-%d')(date);
