@@ -251,10 +251,11 @@ function createLineChart() {
 }
 
 function generateBulletCharts(data) {
-    createBulletChart(data, 'Sales today', '# units', '#bullet-chart-sales svg', function(sales) {
+    createBulletChart(data, 'Sales today', '# units', '#bullet-chart-sales svg', function (sales) {
         return sales.length;
     });
-    createBulletChart(data, 'Profits today', 'NOK', '#bullet-chart-profits svg', function(sales) {
+
+    createBulletChart(data, 'Profits today', 'NOK', '#bullet-chart-profits svg', function (sales) {
         var profits = 0;
 
         for (var saleIndex in sales) {
@@ -266,7 +267,7 @@ function generateBulletCharts(data) {
         return profits;
     });
 
-    createBulletChart(data, 'Beer bottles', '(today) # bottles', '#bullet-chart-bottlebeer svg', function(sales) {
+    createBulletChart(data, 'Beer bottles', '(today) # bottles', '#bullet-chart-bottlebeer svg', function (sales) {
         var bottles = 0;
 
         for (var saleIndex in sales) {
@@ -280,7 +281,7 @@ function generateBulletCharts(data) {
         return bottles;
     });
 
-    createBulletChart(data, 'Total income', '(today) NOK', '#bullet-chart-totalincome svg', function(sales) {
+    createBulletChart(data, 'Total income', '(today) NOK', '#bullet-chart-totalincome svg', function (sales) {
         var income = 0;
 
         for (var saleIndex in sales) {
@@ -292,11 +293,30 @@ function generateBulletCharts(data) {
         return income;
     });
 
-    var bottlebeer = [];
-    for (var i = 0; i < data.length; i++) {
-        var obj = data[i];
-        console.log(obj);
+    var assortment = Assortment.find({title: 'Øl (flaske)'}).fetch()[0].assortment;
 
+    var $bulletCharts = $('#bullet-charts');
+
+    for (var unitIndex in assortment) {
+        var title = assortment[unitIndex].title;
+
+        var htmlTitle = title.replace(/[^a-zA-Z]/g, '-');
+
+        $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="margin-bottom: -2%;"><svg style="width: 100%"></svg></div>');
+
+        createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function(sales) {
+            var count = 0;
+
+            for (var saleIndex in sales) {
+                var sale = sales[saleIndex];
+
+                if (sale.product_name === title) {
+                    count++;
+                }
+            }
+
+            return count;
+        });
     }
 }
 
