@@ -60,8 +60,6 @@ Template.Dashboard.rendered = function () {
                 salesInPreviousPeriod[i].date = moment(salesInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
             }
 
-            console.log(salesInPreviousPeriod);
-
             d3.select('#lineChart svg').datum([
                 {
                     key: 'Sales selected period',
@@ -80,6 +78,7 @@ Template.Dashboard.rendered = function () {
 
         createLineChart();
         createBulletChartSales();
+        createStackedChart();
         meteorTrackerAutorun();
 
         this.rendered = true;
@@ -182,7 +181,7 @@ function createLineChart() {
                 $gte: moment(today).subtract(diff * 2, 'days').format('YYYY-MM-DD'),
                 $lte: moment(today).subtract(diff, 'days').format('YYYY-MM-DD')
             }
-        }).sort({date: 1}).fetch();
+        }, {sort: {date: 1}}).fetch();
 
         for (var i = 0; i < salesDataInPreviousPeriod.length; i++) {
             salesDataInPreviousPeriod[i].date = moment(salesDataInPreviousPeriod[i].date).add(diff, 'days').format('YYYY-MM-DD');
@@ -207,6 +206,8 @@ function createLineChart() {
     });
 }
 
+
+// BULLET CHART:::::::
 var bulletChart = nv.models.bulletChart();
 var sales = {};
 var mean = 0;
@@ -221,7 +222,6 @@ function createBulletChartSales() {
     });
 }
 
-// BULLET CHARTS:::::::
 function updateGraphWhenNewSale() {
     totalItems = 0;
     dateCount = 0;
@@ -247,8 +247,7 @@ function updateGraphWhenNewSale() {
         }
     }
 
-    console.log('total items: ' + totalItems);
-    console.log('date count: ' + dateCount);
+
     if (dateCount === 0) {
         mean = 0;
     } else {
@@ -295,4 +294,131 @@ function getGraphData() {
         measures: [saleCountToday],
         markers: [saleCountYesterday]
     }
+}
+
+
+
+// ----- STACKED
+function createStackedChart() {
+
+    var asd = Sales.find({}, {sort: {date: 1}}).fetch();
+
+    nv.addGraph(function () {
+        var stackedAreaGraph = nv.models.stackedAreaChart()
+            .margin({right: 100})
+            .x(function (d) {
+                return new Date(d[0])
+
+            })   //We can modify the data accessor functions...
+            .y(function (d) {
+
+                return d[1]
+            })   //...in case your data is formatted differently.
+            .useInteractiveGuideline(true)    //Tooltips which show all data points. Very nice!
+            .rightAlignYAxis(true)      //Let's move the y-axis to the right side.
+            .transitionDuration(500)
+            .showControls(true)       //Allow user to choose 'Stacked', 'Stream', 'Expanded' mode.
+            .clipEdge(true);
+
+        //Format x-axis labels with custom function.
+        stackedAreaGraph.xAxis
+            .tickFormat(function (d) {
+                var date = new Date(d);
+                return d3.time.format('%Y-%m-%d')(date);
+            });
+
+        stackedAreaGraph.yAxis
+            .tickFormat(d3.format(',.2f'));
+
+        d3.select('#stackedAreaGraph svg')
+            .datum(getStackedChartReadyArray(asd))
+            .call(stackedAreaGraph);
+
+        nv.utils.windowResize(stackedAreaGraph.update);
+
+        return stackedAreaGraph;
+
+    });
+}
+
+function getStackedChartReadyArray(salesData) {
+/*    var tmp = {};
+
+    salesData.forEach(function(item) {
+        var obj = tmp[item.product_name] || (tmp[item.product_name] = {});
+
+        obj[item.date] = (obj[item.date] || 0) + 1;
+    });
+
+    return Object.keys(tmp).map(function(key) {
+        return {
+            key: key,
+            values: Object.keys(tmp[key]).map(function(date) {
+                return [date, tmp[key][date]];
+            })
+        };
+    });*/
+
+    var result = _.chain(salesData).groupBy('product_name').map(function (el, key) {
+        return {
+            key: key,
+            values: _.chain(el).countBy('date').map(function (count, date) {
+                return [date, count];
+            }).value()
+        }
+    }).value();
+
+    var drinks = [];
+    result.forEach(function(d) {
+        d.values.forEach(function(e) {
+            if(drinks.indexOf(e[0]) == -1) {
+                drinks.push(e[0]);
+            }
+        });
+    });
+
+    result.forEach(function(d) {
+        drinks.forEach(function(drink) {
+            var have = false;
+            d.values.forEach(function(e) {
+                if(e[0] == drink) {
+                    have = true;
+                }
+            });
+            if(!have) {
+                d.values.push([drink, 0]);
+            }
+        });
+    });
+
+
+    for (var i in result) {
+        var sale = result[i];
+
+        sale.values.sort();
+    }
+
+
+    return result;
+
+/*    var counts = salesData.reduce(function(memo, visit) {
+        if (!memo[visit.product_name]) { memo[visit.product_name] = {}; }
+        memo[visit.product_name][visit.date] |= 0;
+        memo[visit.product_name][visit.date] += 1;
+        return memo;
+    }, {});
+    // Transform the count structure using "map".
+    var objects = Object.keys(counts).map(function(city_name) {
+        return {
+            key: city_name,
+            values: Object.keys(counts[city_name]).map(function(date) {
+                return [date, counts[city_name][date]];
+            })
+        };
+    });
+
+    console.log(objects);
+
+    return objects;*/
+
 }
