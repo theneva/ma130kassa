@@ -6,7 +6,7 @@
     background-color: black;
 }
 
-.ui.secondary.menu>.item, .ui.secondary.menu>.menu>.item {
+.ui.secondary.menu > .item, .ui.secondary.menu > .menu > .item {
     box-shadow: none;
     /*min-width: 150px;*/
     border: none;
@@ -21,14 +21,14 @@
 }
 
 .ui.inverted.button {
-    box-shadow: 0 0 0 2px #fff inset!important;
+    box-shadow: 0 0 0 2px #fff inset !important;
     background: 0 0;
     color: #fff;
-    text-shadow: none!important;
+    text-shadow: none !important;
     margin-top: 10px;
 }
 
-.ui.secondary.menu>.item, .ui.secondary.menu>.menu>.item {
+.ui.secondary.menu > .item, .ui.secondary.menu > .menu > .item {
     box-shadow: none;
     /* min-width: 150px; */
     border: none;
@@ -43,13 +43,12 @@
     margin-top: 10px;
 }
 
-#chart g.nv-group path.nv-point
-{
+#chart g.nv-group path.nv-point {
     fill-opacity: 1;
     stroke-opacity: 1;
 }
-#chart g.nv-series-0 path.nv-line
-{
+
+#chart g.nv-series-0 path.nv-line {
     /*stroke-opacity: 0;*/
 }
 
@@ -58,6 +57,32 @@
     background-color: lightgray !important;
 }
 
+#bullet-chart svg text {
+    font-size: 2em !important;
+}
+
+#bullet-chart .nv-title {
+    font-size: 1.5em !important;
+}
+
 svg text {
     font-size: 1.5em;
+}
+
+.nvd3 .nv-legend .nv-series {
+    cursor: pointer;
+    font-size: 1.7em;
+}
+
+.nvtooltip {
+    width: auto;
+    height: auto;
+    position: absolute;
+    opacity: 1;
+    font-size: 2em !important;
+}
+
+.legend-color-guide div {
+    width: 1.5em !important;
+    height: 1.5em !important;
 }
