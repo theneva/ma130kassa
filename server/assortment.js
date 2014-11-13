@@ -11,7 +11,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 21
                 },
                 {
                     'title': 'Pilsner fat 0,5l medlem',
@@ -19,7 +20,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 29
+                    'price': 29,
+                    'wholesale_price': 21
                 },
                 {
                     'title': 'Bayer FAT',
@@ -27,7 +29,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 15,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 42
+                    'price': 42,
+                    'wholesale_price': 22
                 },
                 {
                     'title': 'Bayer FAT Medlem',
@@ -35,7 +38,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 15,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 32
+                    'price': 32,
+                    'wholesale_price': 22
                 },
                 {
                     'title': 'Classic',
@@ -43,7 +47,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 19,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 23
                 },
                 {
                     'title': 'Classic Medlem',
@@ -51,7 +56,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 19,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 29
+                    'price': 29,
+                    'wholesale_price': 23
                 },
                 {
                     'title': 'Mugge PILSNER',
@@ -59,7 +65,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 6,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 99
+                    'price': 99,
+                    'wholesale_price': 64
                 },
                 {
                     'title': 'Mugge BAYER',
@@ -67,7 +74,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 5,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 109
+                    'price': 109,
+                    'wholesale_price': 65
                 },
                 {
                     'title': 'Mugge CLASSIC',
@@ -75,7 +83,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 6,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 109
+                    'price': 109,
+                    'wholesale_price': 68
                 }
             ]
         });
@@ -92,7 +101,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 31,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 23
                 },
                 {
                     'title': 'Stella Artios',
@@ -100,7 +110,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 30,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 26
                 },
                 {
                     'title': 'Erdinger',
@@ -108,7 +119,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 34
                 },
                 {
                     'title': 'Newcastle',
@@ -116,7 +128,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 27
                 },
                 {
                     'title': 'White Dog',
@@ -124,7 +137,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 21
                 },
                 {
                     'title': 'O\'Mission (Glutenfri)',
@@ -132,7 +146,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 25
                 },
                 {
                     'title': 'MÅNEDENS: Halling',
@@ -140,7 +155,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 39
+                    'price': 39,
+                    'wholesale_price': 24
                 },
                 {
                     'title': 'Aas Pale Ale',
@@ -148,7 +164,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 35
+                    'price': 35,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Aas Pale Ale Medlem',
@@ -156,7 +173,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 25
+                    'price': 25,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Aas Weizen',
@@ -164,7 +182,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 35
+                    'price': 35,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Aas Weizen Medlem',
@@ -172,7 +191,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 25
+                    'price': 25,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Aas Bayer Flaske',
@@ -180,7 +200,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 35
+                    'price': 35,
+                    'wholesale_price': 18
                 },
                 {
                     'title': 'Aas Bayer Flaske Medlem',
@@ -188,7 +209,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 25
+                    'price': 25,
+                    'wholesale_price': 18
                 },
                 {
                     'title': 'Aas Bock',
@@ -196,7 +218,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 32,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 35
+                    'price': 35,
+                    'wholesale_price': 24
                 },
                 {
                     'title': 'Aas Bock Medlem',
@@ -204,7 +227,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 32,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 32
+                    'price': 32,
+                    'wholesale_price': 24
                 },
                 {
                     'title': 'Aas Stout',
@@ -212,7 +236,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 20,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 35
+                    'price': 35,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Aas Stout Medlem',
@@ -220,7 +245,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 20,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 25
+                    'price': 25,
+                    'wholesale_price': 19
                 }
             ]
         });
@@ -237,7 +263,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 5,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 11
                 },
                 {
                     'title': 'Cola Zero',
@@ -245,7 +272,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 11
                 },
                 {
                     'title': 'Popcorn',
@@ -253,7 +281,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 15
+                    'price': 15,
+                    'wholesale_price': 11
                 },
                 {
                     'title': 'Solo',
@@ -261,7 +290,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 10
                 },
                 {
                     'title': 'Aass UTEN',
@@ -269,7 +299,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 1,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 11
                 },
                 {
                     'title': 'Chilinøtter',
@@ -277,7 +308,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 20,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 25
+                    'price': 25,
+                    'wholesale_price': 18
                 },
                 {
                     'title': 'Potetgull SALT',
@@ -285,7 +317,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 13
+                    'price': 13,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Potetgull PAPRIKA',
@@ -293,7 +326,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 13
+                    'price': 13,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Potetgull Salt og Pepper',
@@ -301,7 +335,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 13
+                    'price': 13,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Glitre TYTTEBÆR',
@@ -309,7 +344,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 4,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 12
                 },
                 {
                     'title': 'Glitre NATURELL',
@@ -317,7 +353,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 6,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 12
                 },
                 {
                     'title': 'Ubuntu Cola',
@@ -325,7 +362,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 12
                 },
                 {
                     'title': 'Sprite',
@@ -333,7 +371,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 3,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 11
                 },
                 {
                     'title': 'Bayer UTEN',
@@ -341,7 +380,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 17
+                    'price': 17,
+                    'wholesale_price': 12
                 }
             ]
         });
@@ -358,7 +398,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 0,
                     'total_sales': 0,
                     'in_assortment': false,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 23
                 },
                 {
                     'title': 'Crabbies',
@@ -366,7 +407,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 21,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 25
                 },
                 {
                     'title': 'Hvitvin',
@@ -374,7 +416,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 14,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Hvitvin MEDLEM',
@@ -382,7 +425,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 14,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 27
+                    'price': 27,
+                    'wholesale_price': 19
                 },
                 {
                     'title': 'Rødvin',
@@ -390,7 +434,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 16
                 },
                 {
                     'title': 'Rødvin MEDLEM',
@@ -398,7 +443,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 27
+                    'price': 27,
+                    'wholesale_price': 16
                 },
                 {
                     'title': 'Rødvin Halvflaske',
@@ -406,7 +452,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 5,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 95
+                    'price': 95,
+                    'wholesale_price': 69
                 },
                 {
                     'title': 'Cava Flaske',
@@ -414,7 +461,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 140
+                    'price': 140,
+                    'wholesale_price': 86
                 },
                 {
                     'title': 'Hooch',
@@ -422,7 +470,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 7,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 37
+                    'price': 37,
+                    'wholesale_price': 21
                 }
             ]
         });
@@ -439,7 +488,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 4,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 20
+                    'price': 20,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Fiskefjes 4 for 60',
@@ -447,7 +497,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 1,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 60
+                    'price': 60,
+                    'wholesale_price': 32
                 },
                 {
                     'title': 'Små Grønne SHOT',
@@ -455,7 +506,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 8,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 20
+                    'price': 20,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Små Grønne 4 for 60',
@@ -463,7 +515,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 2,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 60
+                    'price': 60,
+                    'wholesale_price': 32
                 },
                 {
                     'title': 'Små Grå SHOT',
@@ -471,7 +524,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 20
+                    'price': 20,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Små Grå 4 for 60',
@@ -479,7 +533,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 2,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 60
+                    'price': 60,
+                    'wholesale_price': 32
                 },
                 {
                     'title': 'Små Kolde SHOT',
@@ -487,7 +542,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 12,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 20
+                    'price': 20,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Små Kolde 4 for 60',
@@ -495,7 +551,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 3,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 60
+                    'price': 60,
+                    'wholesale_price': 32
                 },
                 {
                     'title': 'Små Blå SHOT',
@@ -503,7 +560,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 10,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 20
+                    'price': 20,
+                    'wholesale_price': 8
                 },
                 {
                     'title': 'Små Blå 4 for 60',
@@ -511,7 +569,8 @@ if (Assortment.find().count() === 0) {
                     'in_stock': 2,
                     'total_sales': 0,
                     'in_assortment': true,
-                    'price': 60
+                    'price': 60,
+                    'wholesale_price': 32
                 }
             ]
         });
@@ -520,6 +579,8 @@ if (Assortment.find().count() === 0) {
 if (Sales.find().count() === 0) {
 
     var days = 100;
+    var categories = Assortment.find().fetch();
+    console.log(categories);
     for (var i = 0; i < days; i++) {
 
         var now = moment();
@@ -527,10 +588,22 @@ if (Sales.find().count() === 0) {
 
         // each day
         for (var j = 0; j < Math.floor((Math.random() * 15) + 10); j++) {
-            Sales.insert({
-                product_name: ['Pilsner', 'Kirin', 'White Dog', 'Den siste'][Math.floor((Math.random() * 4))],
-                date: now.format('YYYY-MM-DD').substring(0, 10)
-            });
+
+            var selectedCategory = categories[Math.floor(Math.random(categories.length()))];
+
+            for (var k in categories) {
+                var selectedItem = selectedCategory.assortment[k];
+
+
+                Sales.insert({
+                    product_name: selectedItem.title,
+                    wholesale_price: selectedItem.wholesale_price,
+                    price: selectedItem.price,
+                    date: now.format('YYYY-MM-DD').substring(0, 10)
+                });
+
+            }
+
         }
     }
 }

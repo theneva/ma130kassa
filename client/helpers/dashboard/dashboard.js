@@ -174,7 +174,7 @@ function createLineChart() {
     var today = now.format('YYYY-MM-DD');
 
     lineChart = nv.models.lineChart()
-        .margin({left: 70})
+        .margin({right: 100, bottom: 100, left: 100, top: 100})
         .useInteractiveGuideline(true)
         .transitionDuration(350)
         .showLegend(true)
@@ -191,6 +191,7 @@ function createLineChart() {
 
         lineChart.xAxis
             .axisLabel('Date')
+            .rotateLabels(-45)
             .tickFormat(function (d) {
                 var date = new Date(d);
 

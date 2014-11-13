@@ -9,11 +9,12 @@ Template.AssortmentCategoryContent.events({
             if (this.in_stock > 0) {
                 toastr.success('En <b>' + this.title + '</b> er bestilt!');
 
-                //Assortment.update({title: this.title}, {$inc: {"$.assortment.$.total_sales": 1}});
+                //Assortment.update({title: this.title}, {$inc: {"$.categories.$.total_sales": 1}});
                 Sales.insert({
                     product_name: this.title,
                     date: moment().format('YYYY-MM-DD').substring(0, 10),
-                    price: this.price
+                    price: this.price,
+                    wholesale_price: this.wholesale_price
                 });
 
             } else {
