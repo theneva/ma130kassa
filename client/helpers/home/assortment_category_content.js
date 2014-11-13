@@ -11,7 +11,7 @@ Template.AssortmentCategoryContent.events({
 
                 //Assortment.update({title: this.title}, {$inc: {"$.categories.$.total_sales": 1}});
                 Sales.insert({
-                    product_name: this.title,
+                    product_name: this.title, // TODO use category instead
                     date: moment().format('YYYY-MM-DD').substring(0, 10),
                     price: this.price,
                     wholesale_price: this.wholesale_price

@@ -185,7 +185,7 @@ function createLineChart() {
     var today = now.format('YYYY-MM-DD');
 
     lineChart = nv.models.lineChart()
-        .margin({right: 100, bottom: 100, left: 100, top: 100})
+        .margin({right: 100, bottom: 150, left: 100, top: 100})
         .useInteractiveGuideline(true)
         .transitionDuration(350)
         .showLegend(true)
