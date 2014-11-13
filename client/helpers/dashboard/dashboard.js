@@ -252,12 +252,12 @@ function createLineChart() {
 
 
 // BULLET CHART:::::::
-var bulletChart = nv.models.bulletChart();
-var sales = {};
-var mean = 0;
-var highestSingleDaySaleCount = 0;
-var totalItems = 0;
-var dateCount = 0;
+var bulletChartSales = nv.models.bulletChart();
+var salesSales = {};
+var meanSales = 0;
+var highestSingleDaySaleCountSales = 0;
+var totalItemsSales = 0;
+var dateCountSales = 0;
 
 function createBulletChartSales() {
 
@@ -266,75 +266,78 @@ function createBulletChartSales() {
     });
 }
 
+
+var salesGraphSalesData;
 function updateGraphWhenNewSale() {
-    totalItems = 0;
-    dateCount = 0;
-    highestSingleDaySaleCount = 0;
-    sales = {};
+    totalItemsSales = 0;
+    dateCountSales = 0;
+    highestSingleDaySaleCountSales = 0;
+    salesSales = {};
 
-    var data = Sales.find({}, {sort: {date: 1}}).fetch();
+    salesGraphSalesData = Sales.find({}, {sort: {date: 1}}).fetch();
 
-    data.forEach(function (sale) {
+    //var latest = Sales.find({}, {sort: {inserted_timestamp: -1}, limit:1}).fetch();
+
+    salesGraphSalesData.forEach(function (sale) {
         addSale(sale);
     });
 
-    for (var date in sales) {
-        dateCount++;
+    for (var date in salesSales) {
+        dateCountSales++;
 
-        var salesByDate = sales[date];
+        var salesByDate = salesSales[date];
 
         var saleCountOnDate = salesByDate.length;
-        totalItems += saleCountOnDate;
+        totalItemsSales += saleCountOnDate;
 
-        if (saleCountOnDate > highestSingleDaySaleCount) {
-            highestSingleDaySaleCount = saleCountOnDate;
+        if (saleCountOnDate > highestSingleDaySaleCountSales) {
+            highestSingleDaySaleCountSales = saleCountOnDate;
         }
     }
 
-
-    if (dateCount === 0) {
-        mean = 0;
+    if (dateCountSales === 0) {
+        meanSales = 0;
     } else {
-        mean = totalItems / dateCount;
+        meanSales = totalItemsSales / dateCountSales;
     }
 
-    updateGraph();
+    updateGraphSales();
 }
 
 function addSale(sale) {
     var date = sale.date;
 
-    if (sales[date]) {
-        sales[date].push(sale);
+    if (salesSales[date]) {
+        salesSales[date].push(sale);
     } else {
-        sales[date] = [sale];
+        salesSales[date] = [sale];
     }
 }
 
-function updateGraph() {
-    var graphData = getGraphData();
+function updateGraphSales() {
+    var graphData = getGraphDataSales();
 
-    d3.select('#bullet-chart svg')
+    d3.select('#bullet-chart-sales svg')
         .datum(graphData)
         .transition().duration(500)
-        .call(bulletChart);
+        .call(bulletChartSales);
 
-    bulletChart.update();
+    bulletChartSales.update();
 }
 
-function getGraphData() {
+function getGraphDataSales() {
     var now = moment();
     var todayString = now.format('YYYY-MM-DD');
     now.subtract(1, 'day');
     var yesterdayString = now.format('YYYY-MM-DD');
 
-    var saleCountToday = sales[todayString] ? sales[todayString].length : 0;
-    var saleCountYesterday = sales[yesterdayString] ? sales[yesterdayString].length : 0;
+    var saleCountToday = salesSales[todayString] ? salesSales[todayString].length : 0;
+    var saleCountYesterday = salesSales[yesterdayString] ? salesSales[yesterdayString].length : 0;
 
     return {
         title: "Sales today",
         subtitle: "# units",
-        ranges: [0, mean, highestSingleDaySaleCount],
+        ranges: [0, meanSales, highestSingleDaySaleCountSales],
         measures: [saleCountToday],
         markers: [saleCountYesterday]
     }

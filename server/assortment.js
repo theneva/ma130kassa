@@ -616,7 +616,8 @@ if (Sales.find().count() === 0) {
                 category: selectedCategory.title,
                 price: selectedItem.price,
                 wholesale_price: selectedItem.wholesale_price,
-                date: now.format('YYYY-MM-DD')
+                date: now.format('YYYY-MM-DD'),
+                inserted_timestamp: new Date().valueOf()
             };
 
             Sales.insert(sale);
