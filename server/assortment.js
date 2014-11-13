@@ -592,19 +592,33 @@ if (Sales.find().count() === 0) {
         var actualSales = Math.floor(Math.random() * (maxSales - minSales)) + minSales;
 
         for (var saleIndex = 0; saleIndex < actualSales; saleIndex++) {
-            var selectedCategory = categories[Math.floor(Math.random() * categories.length)];
-            //console.log('\tselected category: ' + selectedCategory.title);
+            var selectedCategory;
+
+            // weight heavily towards beer
+            var xyzzy = Math.random() * 100;
+
+            if (xyzzy >= 70) {
+                // øl (tapp)
+                selectedCategory = categories[0];
+            } else if (xyzzy >= 50) {
+                // øl (flaske)
+                selectedCategory = categories[1];
+            } else if (xyzzy >= 40) {
+                selectedCategory = categories[2];
+            } else {
+                selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+            }
 
             var selectedItem = selectedCategory.assortment[Math.floor(Math.random() * selectedCategory.assortment.length)];
 
-            var objectToInsert = {
-                product_name: selectedCategory.title,
+            var sale = {
+                product_name: selectedItem.title,
                 price: selectedItem.price,
                 wholesale_price: selectedItem.wholesale_price,
                 date: now.format('YYYY-MM-DD')
             };
 
-            Sales.insert(objectToInsert);
+            Sales.insert(sale);
         }
     }
 }

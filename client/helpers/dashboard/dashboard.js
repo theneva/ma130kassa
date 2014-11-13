@@ -4,7 +4,11 @@ var stackedAreaGraph;
 
 Template.Dashboard.rendered = function () {
 
+    //$('.ui.dropdown').dropdown();
     if (!this.rendered) {
+
+        //$('.ui.dropdown').dropdown();
+
         var $fromField = $("#line-chart-from-date");
         var $toField = $("#line-chart-to-date");
 
@@ -337,7 +341,7 @@ function createStackedChart() {
 
     nv.addGraph(function () {
         stackedAreaGraph = nv.models.stackedAreaChart()
-            .margin({right: 100, bottom: 100, left: 100, top: 100})
+            .margin({right: 100, bottom: 100, left: 100})
             .x(function (d) {
                 return new Date(d[0])
 

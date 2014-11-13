@@ -1,23 +1,14 @@
 <template name="Dashboard">
     <div class="ui horizontal divider">#fuBar by the numbers</div>
 
-    <div class="ui grid"  style="margin: 1%;">
+    <div class="ui grid" style="margin: 1%;">
         <div class="two column row">
             <div class="column">
                 <div class="ui segment">
-                    <div id="bullet-chart">
+                    <div id="bullet-chart" style="margin-bottom: -2%">
                         <svg style="width: 100%;"></svg>
                     </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui segment">
-                    Tablet
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui segment">
-                    <div id="somechart"></div>
+                    <div class="ui divider"></div>
                     <div>
                         <div class="ui form">
                             <div class="inline field">
@@ -32,6 +23,12 @@
                             <svg style="width:100%; min-height: 400px;"></svg>
                         </div>
                     </div>
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui segment">
+                    Tablet
                 </div>
             </div>
         </div>
