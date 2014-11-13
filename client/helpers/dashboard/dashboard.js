@@ -291,6 +291,13 @@ function generateBulletCharts(data) {
 
         return income;
     });
+
+    var bottlebeer = [];
+    for (var i = 0; i < data.length; i++) {
+        var obj = data[i];
+        console.log(obj);
+
+    }
 }
 
 function createBulletChart(allSales, title, subtitle, selector, calculate) {
