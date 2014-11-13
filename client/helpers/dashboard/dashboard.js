@@ -265,6 +265,23 @@ function generateBulletCharts(data) {
 
         return profits;
     });
+
+    createBulletChart(data, 'Bottles of beer today', '# flaskeøl', '#bullet-chart-bottlebeer svg', function(sales) {
+        var bottles = 0;
+
+        for (var saleIndex in sales) {
+            var sale = sales[saleIndex];
+            console.log(sale.category);
+
+            if (sale.category === "Øl (flaske)") {
+                bottles++;
+            }
+
+            //profits += sale.price - sale.wholesale_price;
+        }
+
+        return bottles;
+    });
 }
 
 function createBulletChart(allSales, title, subtitle, selector, calculate) {
@@ -318,7 +335,7 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     };
 
     var bulletChart = nv.models.bulletChart()
-        .margin({top: 10, bottom: 20, left: 80, right: 5});
+        .margin({top: 10, bottom: 20, left: 130, right: 5});
 
     nv.addGraph(function () {
         d3.select(selector)
