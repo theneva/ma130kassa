@@ -11,28 +11,28 @@
 
         {{#each assortment}}
             {{#if isMedlem title}}
-                    <div class="massive ui inverted purple button">
+                    <div class="massive ui inverted purple button" data-category="{{../title}}">
                         {{title}}
                         {{#if inStock in_stock}}
-                            <a class="ui green circular label">
+                            <a class="ui green circular label" data-category="{{../title}}">
                                 {{in_stock}}
                             </a>
                         {{else}}
-                            <a class="ui red circular label">
+                            <a class="ui red circular label" data-category="{{../title}}">
 
                             </a>
                         {{/if}}
                     </div>
             {{else}}
-                <div class="massive ui inverted blue button">
+                <div class="massive ui inverted blue button" data-category="{{../title}}">
                     {{title}}
 
                     {{#if inStock in_stock}}
-                        <a class="ui green circular label">
+                        <a class="ui green circular label" data-category="{{../title}}">
                             {{in_stock}}
                         </a>
                     {{else}}
-                        <a class="ui red circular label">
+                        <a class="ui red circular label" data-category="{{../title}}">
 
                         </a>
                     {{/if}}

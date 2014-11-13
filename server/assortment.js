@@ -612,7 +612,8 @@ if (Sales.find().count() === 0) {
             var selectedItem = selectedCategory.assortment[Math.floor(Math.random() * selectedCategory.assortment.length)];
 
             var sale = {
-                product_name: selectedCategory.title,
+                product_name: selectedItem.title,
+                category: selectedCategory.title,
                 price: selectedItem.price,
                 wholesale_price: selectedItem.wholesale_price,
                 date: now.format('YYYY-MM-DD')

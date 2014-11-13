@@ -387,7 +387,7 @@ function createStackedChart() {
 
 function getStackedChartReadyArray(salesData) {
 
-    var result = _.chain(salesData).groupBy('product_name').map(function (el, key) {
+    var result = _.chain(salesData).groupBy('category').map(function (el, key) {
         return {
             key: key,
             values: _.chain(el).countBy('date').map(function (count, date) {
