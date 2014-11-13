@@ -250,6 +250,8 @@ function createLineChart() {
     });
 }
 
+var firstRun = true;
+
 function generateBulletCharts(data) {
     createBulletChart(data, 'Sales today', '# units', '#bullet-chart-sales svg', function (sales) {
         return sales.length;
@@ -295,6 +297,9 @@ function generateBulletCharts(data) {
 
     var assortment = Assortment.find({title: 'Øl (flaske)'}).fetch()[0].assortment;
 
+    console.log('assortment: ');
+    console.log(assortment);
+
     var $bulletCharts = $('#bullet-charts');
 
     for (var unitIndex in assortment) {
@@ -302,9 +307,11 @@ function generateBulletCharts(data) {
 
         var htmlTitle = title.replace(/[^a-zA-Z]/g, '-');
 
-        $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="margin-bottom: -2%;"><svg style="width: 100%"></svg></div>');
+        if (firstRun) {
+            $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="margin-bottom: -2%;"><svg style="width: 100%"></svg></div>');
+        }
 
-        createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function(sales) {
+        createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
             var count = 0;
 
             for (var saleIndex in sales) {
@@ -318,6 +325,8 @@ function generateBulletCharts(data) {
             return count;
         });
     }
+
+    firstRun = false;
 }
 
 function createBulletChart(allSales, title, subtitle, selector, calculate) {
