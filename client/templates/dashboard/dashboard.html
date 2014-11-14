@@ -5,11 +5,15 @@
         <div class="two column row">
             <div class="column">
                 <div class="ui segment">
+                    <div class="ui horizontal divider">Total sales</div>
                     <div id="bullet-chart-sales" style="margin-bottom: -2%">
                         <svg style="width: 100%;"></svg>
                     </div>
                     <div class="ui divider"></div>
                     <div>
+                        <div id="lineChart">
+                            <svg style="width:100%; min-height: 400px;"></svg>
+                        </div>
                         <div class="ui form">
                             <div class="inline field">
                                 <label>Time period:</label>
@@ -19,43 +23,32 @@
                                        data-datepicker-format="YYYY-MM-DD"/>
                             </div>
                         </div>
-                        <div id="lineChart">
-                            <svg style="width:100%; min-height: 400px;"></svg>
-                        </div>
                     </div>
                 </div>
                 <div class="ui segment">
-                    <div>
-                        <div id="stackedAreaGraph">
-                            <svg style="width:100%; min-height: 1150px;"></svg>
-                        </div>
+                    <div class="ui horizontal divider">Sales by category</div>
+                    <div id="stackedAreaGraph">
+                        <svg style="width:100%; min-height: 1150px;"></svg>
                     </div>
                 </div>
             </div>
             <div class="column">
-                <div id="bullet-charts" class="ui segment">
+                <div class="ui segment">
+                    <div class="ui horizontal divider">Cash flow</div>
+
                     <div id="bullet-chart-profits" style="margin-bottom: -2%">
                         <svg style="width: 100%;"></svg>
                     </div>
                     <div id="bullet-chart-totalincome" style="margin-bottom: -2%">
                         <svg style="width: 100%;"></svg>
                     </div>
-                    <div class="ui horizontal divider">Bottle beers</div>
-<!--                    <div id="bullet-chart-bottlebeer" style="margin-bottom: -2%">
-                        <svg style="width: 100%;"></svg>
-                    </div>-->
                 </div>
-            </div>
-        </div>
-        <div class="two column row">
-            <div class="column">
-                <!--<div class="ui segment">-->
-                    <!--<div>-->
-                        <!--<div id="stackedAreaGraph">-->
-                            <!--<svg style="width:100%; min-height: 1150px;"></svg>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+
+                <div class="ui segment">
+                    <div id="bullet-charts">
+                        <div class="ui horizontal divider">Bottled beer sales today</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

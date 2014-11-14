@@ -90,3 +90,20 @@ svg text {
 .ui.horizontal.divider {
     font-size: 2em;
 }
+
+.ui.form .inline.field>:first-child, .ui.form .inline.fields .field>:first-child {
+    font-size: 2em;
+}
+
+.ui.form .inline.field>input, .ui.form .inline.fields .field>input {
+    font-size: 2em;
+}
+
+.datepicker.dropdown-menu {
+    width: 340px;
+    height: 400px;
+}
+
+.datepicker td, .datepicker th {
+    font-size: 2em;
+}

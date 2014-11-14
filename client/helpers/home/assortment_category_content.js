@@ -9,6 +9,7 @@ Template.AssortmentCategoryContent.events({
             if (this.in_stock > 0) {
                 toastr.success('En <b>' + this.title + '</b> er bestilt!');
 
+                // If implementing inventory system fully, modify this:
                 //Assortment.update({title: this.title}, {$inc: {"$.categories.$.total_sales": 1}});
 
                 var sale = Sales.insert({

@@ -284,7 +284,7 @@ function generateBulletCharts(data) {
         return bottles;
     });*/
 
-    createBulletChart(data, 'Total income', '(today) NOK', '#bullet-chart-totalincome svg', function (sales) {
+    createBulletChart(data, 'Income today', 'NOK', '#bullet-chart-totalincome svg', function (sales) {
         var income = 0;
 
         for (var saleIndex in sales) {
@@ -321,7 +321,7 @@ function generateBulletCharts(data) {
             $bottleBulletChartDivs.push($(insertedDivId));
         }
 
-        var mean = createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
+        var mean = createBulletChart(data, title, '#   ', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
             var count = 0;
 
             for (var saleIndex in sales) {
@@ -388,7 +388,7 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     for (var date in salesByDate) {
         var sales = salesByDate[date];
 
-        var currentEntry = calculate(sales);
+        var currentEntry = calculate(sales || []);
 
         sum += currentEntry;
 
