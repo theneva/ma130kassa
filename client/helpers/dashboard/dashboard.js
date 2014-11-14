@@ -4,6 +4,11 @@ var stackedAreaGraph;
 
 Template.Dashboard.rendered = function () {
 
+    $('html, body').css({
+        'overflow': 'hidden',
+        'height': '100%'
+    });
+
     //$('.ui.dropdown').dropdown();
     if (!this.rendered) {
 
@@ -326,7 +331,7 @@ function generateBulletCharts(data) {
             $bottleBulletChartDivs.push($(insertedDivId));
         }
 
-        var mean = createBulletChart(data, title, '#   ', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
+        var mean = createBulletChart(data, title, 'today: #', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
             var count = 0;
 
             for (var saleIndex in sales) {
