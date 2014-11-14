@@ -1,3 +1,9 @@
+.nvd3 .nv-groups path.nv-line {
+    fill: none;
+    stroke-width: 5px;
+}
+
+
 #layout-wrapper {
     margin-top: 1%;
 }
@@ -106,4 +112,8 @@ svg text {
 
 .datepicker td, .datepicker th {
     font-size: 2em;
+}
+
+.nv-legend-text {
+    font-size: 1.2em;
 }

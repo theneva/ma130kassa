@@ -75,11 +75,13 @@ Template.Dashboard.rendered = function () {
             d3.select('#lineChart svg').datum([
                 {
                     key: 'Sales selected period',
-                    values: getLineChartReadyArray(salesInPeriod)
+                    values: getLineChartReadyArray(salesInPeriod),
+                    color: '#663399'
                 },
                 {
                     key: 'Sales previous period',
-                    values: getLineChartReadyArray(salesInPreviousPeriod)
+                    values: getLineChartReadyArray(salesInPreviousPeriod),
+                    color: 'rgba(162, 222, 208, 0.3)'
                 }
             ]).call(lineChart);
             lineChart.update();
@@ -116,7 +118,8 @@ function meteorTrackerAutorun() {
         var lineData = [];
         lineData.push({
             values: getLineChartReadyArray(salesData),
-            key: 'Sales selected period'
+            key: 'Sales selected period',
+            color: '#663399'
         });
 
         d3.select('#lineChart svg').datum(
@@ -236,12 +239,14 @@ function createLineChart() {
                             $lte: today
                         }
                     }, {sort: {date: 1}}).fetch()),
-                    key: 'Sales selected period'
+                    key: 'Sales selected period',
+                    color: '#663399'
                 },
                 {
                     // Get the data between today and seven days ago
                     values: getLineChartReadyArray(salesDataInPreviousPeriod),
-                    key: 'Sales previous period'
+                    key: 'Sales previous period',
+                    color: 'rgba(162, 222, 208, 0.3)'
                 }
             ]
         ).call(lineChart);
@@ -402,6 +407,13 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
         meanEntry = sum / totalDates;
     }
 
+    if (highestSingleDayEntry < 20) {
+        highestSingleDayEntry = 20
+    }
+
+    console.log(highestSingleDayEntry);
+
+
     var graphData = {
         "title": title,
         "subtitle": subtitle,
@@ -411,7 +423,7 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     };
 
     var bulletChart = nv.models.bulletChart()
-        .margin({top: 10, bottom: 20, left: 180, right: 20});
+        .margin({top: 10, bottom: 20, left: 180, right: 35});
 
     nv.addGraph(function () {
         d3.select(selector)
