@@ -269,7 +269,7 @@ function generateBulletCharts(data) {
         return profits;
     });
 
-    createBulletChart(data, 'Beer bottles', '(today) # bottles', '#bullet-chart-bottlebeer svg', function (sales) {
+/*    createBulletChart(data, 'Beer bottles', '(today) # bottles', '#bullet-chart-bottlebeer svg', function (sales) {
         var bottles = 0;
 
         for (var saleIndex in sales) {
@@ -281,7 +281,7 @@ function generateBulletCharts(data) {
         }
 
         return bottles;
-    });
+    });*/
 
     createBulletChart(data, 'Total income', '(today) NOK', '#bullet-chart-totalincome svg', function (sales) {
         var income = 0;
@@ -302,16 +302,29 @@ function generateBulletCharts(data) {
 
     var $bulletCharts = $('#bullet-charts');
 
+    var highestMean = 0;
+    var $highestMeanDiv;
+    var lowestMean = Number.MAX_VALUE;
+    var $lowestMeanDiv;
+
     for (var unitIndex in assortment) {
         var title = assortment[unitIndex].title;
 
-        var htmlTitle = title.replace(/[^a-zA-Z]/g, '-');
-
-        if (firstRun) {
-            $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="margin-bottom: -2%;"><svg style="width: 100%"></svg></div>');
+        if (title.toLowerCase().indexOf('medlem') > -1) {
+            continue;
         }
 
-        createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
+        var htmlTitle = title.replace(/[^a-zA-Z]/g, '-');
+
+        var insertedDiv;
+
+        if (firstRun) {
+            $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="height: 110px"><svg style="width: 100%"></svg></div>');
+            var insertedDivId = "#bullet-chart-" + htmlTitle;
+            insertedDiv = $(insertedDivId);
+        }
+
+        var mean = createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
             var count = 0;
 
             for (var saleIndex in sales) {
@@ -324,7 +337,23 @@ function generateBulletCharts(data) {
 
             return count;
         });
+
+        console.log(mean);
+
+        if (mean < lowestMean) {
+            lowestMean = mean;
+            $lowestMeanDiv = insertedDiv;
+        } else if (mean > highestMean) {
+            highestMean = mean;
+            $highestMeanDiv = insertedDiv;
+        }
     }
+
+    $highestMeanDiv.css('background-color', 'rgba(46, 204, 113, 0.1)');
+    $lowestMeanDiv.css('background-color', 'rgba(231, 76, 60, 0.1)');
+
+    //highestMeanDiv.attr('bgcolor', 'green');
+    //lowestMeanDiv.attr('bgcolor', 'red');
 
     firstRun = false;
 }
@@ -349,8 +378,8 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     var today = moment().format('YYYY-MM-DD');
     var yesterday = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
-    var entriesToday = calculate(salesByDate[today]);
-    var entriesYesterday = calculate(salesByDate[yesterday]);
+    var entriesToday = calculate(salesByDate[today] || []);
+    var entriesYesterday = calculate(salesByDate[yesterday || []]);
 
     // calculate mean and max values
     var sum = 0;
@@ -380,7 +409,7 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     };
 
     var bulletChart = nv.models.bulletChart()
-        .margin({top: 10, bottom: 20, left: 130, right: 5});
+        .margin({top: 10, bottom: 20, left: 180, right: 20});
 
     nv.addGraph(function () {
         d3.select(selector)
@@ -390,6 +419,8 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
 
         return bulletChart;
     });
+
+    return meanEntry;
 }
 
 

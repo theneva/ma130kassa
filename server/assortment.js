@@ -141,7 +141,7 @@ if (Assortment.find().count() === 0) {
                     'wholesale_price': 21
                 },
                 {
-                    'title': 'O\'Mission (Glutenfri)',
+                    'title': 'O\'Mission',
                     'image': '',
                     'in_stock': 0,
                     'total_sales': 0,
@@ -150,7 +150,7 @@ if (Assortment.find().count() === 0) {
                     'wholesale_price': 25
                 },
                 {
-                    'title': 'MÅNEDENS: Halling',
+                    'title': 'Halling',
                     'image': '',
                     'in_stock': 0,
                     'total_sales': 0,
