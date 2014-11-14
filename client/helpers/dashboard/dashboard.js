@@ -9,6 +9,7 @@ Template.Dashboard.rendered = function () {
         'height': '100%'
     });
 
+
     //$('.ui.dropdown').dropdown();
     if (!this.rendered) {
 
@@ -415,8 +416,6 @@ function createBulletChart(allSales, title, subtitle, selector, calculate) {
     if (highestSingleDayEntry < 20) {
         highestSingleDayEntry = 20
     }
-
-    console.log(highestSingleDayEntry);
 
 
     var graphData = {
