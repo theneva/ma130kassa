@@ -251,6 +251,7 @@ function createLineChart() {
 }
 
 var firstRun = true;
+var $bottleBulletChartDivs = [];
 
 function generateBulletCharts(data) {
     createBulletChart(data, 'Sales today', '# units', '#bullet-chart-sales svg', function (sales) {
@@ -297,9 +298,6 @@ function generateBulletCharts(data) {
 
     var assortment = Assortment.find({title: 'Øl (flaske)'}).fetch()[0].assortment;
 
-    console.log('assortment: ');
-    console.log(assortment);
-
     var $bulletCharts = $('#bullet-charts');
 
     var highestMean = 0;
@@ -307,6 +305,7 @@ function generateBulletCharts(data) {
     var lowestMean = Number.MAX_VALUE;
     var $lowestMeanDiv;
 
+    var chartIndex = 0;
     for (var unitIndex in assortment) {
         var title = assortment[unitIndex].title;
 
@@ -316,12 +315,10 @@ function generateBulletCharts(data) {
 
         var htmlTitle = title.replace(/[^a-zA-Z]/g, '-');
 
-        var insertedDiv;
-
         if (firstRun) {
             $bulletCharts.append('<div id="bullet-chart-' + htmlTitle + '" style="height: 110px"><svg style="width: 100%"></svg></div>');
             var insertedDivId = "#bullet-chart-" + htmlTitle;
-            insertedDiv = $(insertedDivId);
+            $bottleBulletChartDivs.push($(insertedDivId));
         }
 
         var mean = createBulletChart(data, title, 'today', '#bullet-chart-' + htmlTitle + ' svg', function (sales) {
@@ -338,7 +335,7 @@ function generateBulletCharts(data) {
             return count;
         });
 
-        console.log(mean);
+        var insertedDiv = $bottleBulletChartDivs[chartIndex++];
 
         if (mean < lowestMean) {
             lowestMean = mean;
@@ -347,6 +344,11 @@ function generateBulletCharts(data) {
             highestMean = mean;
             $highestMeanDiv = insertedDiv;
         }
+    }
+
+    for (var divIndex = 0; divIndex < $bottleBulletChartDivs.length; divIndex++) {
+        var div = $bottleBulletChartDivs[divIndex];
+        div.css('background-color', 'transparent');
     }
 
     $highestMeanDiv.css('background-color', 'rgba(46, 204, 113, 0.1)');
